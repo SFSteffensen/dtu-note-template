@@ -3,92 +3,102 @@
 
 #import "colors.typ": *
 
-#let definition(term, content) = {
-  rect(
+#let definition(title: none, content) = {
+  block(
     width: 100%,
     inset: 1.2em,
     fill: rgb("#f8f9ff"),
     stroke: (left: 4pt + dtu-blue),
     radius: (right: 3pt),
+    breakable: true,
     [
-      #text(weight: "bold", fill: dtu-blue, size: 12pt)[Definition: #term]
+      #text(weight: "bold", fill: dtu-blue, size: 12pt)[
+        Definition#if title != none [ (#title) ]
+      ]
       #v(0.3em)
       #content
-    ]
+    ],
   )
 }
 
-#let theorem(name: "", content) = {
-  rect(
+#let theorem(title: none, content) = {
+  block(
     width: 100%,
     inset: 1.2em,
     fill: rgb("#fff8f8"),
     stroke: (left: 4pt + dtu-red),
     radius: (right: 3pt),
+    breakable: true,
     [
       #text(weight: "bold", fill: dtu-red, size: 12pt)[
-        Theorem#if name != "" [ (#name)]
+        Theorem#if title != none [ (#title) ]
       ]
       #v(0.3em)
       #content
-    ]
+    ],
   )
 }
 
-#let example(content) = {
-  rect(
+#let example(title: none, content) = {
+  block(
     width: 100%,
     inset: 1.2em,
     fill: rgb("#f9fff9"),
     stroke: (left: 4pt + dtu-green),
     radius: (right: 3pt),
+    breakable: true,
     [
-      #text(weight: "bold", fill: dtu-green, size: 12pt)[Example]
+      #text(weight: "bold", fill: dtu-green, size: 12pt)[
+        Example#if title != none [ (#title) ]
+      ]
       #v(0.3em)
       #content
-    ]
+    ],
   )
 }
 
-#let important(content) = {
-  rect(
-    width: 100%,
-    inset: 1.2em,
-    fill: rgb("#fff5f5"),
-    stroke: 2pt + dtu-coral,
-    radius: 4pt,
-    [
-      #text(weight: "bold", fill: dtu-coral, size: 12pt)[Important]
-      #v(0.3em)
-      #content
+#let important(title: none, content) = {
+  block(width: 100%, inset: 1.2em, fill: rgb("#fff5f5"), stroke: 2pt + dtu-coral, radius: 4pt, breakable: true, [
+    #text(weight: "bold", fill: dtu-coral, size: 12pt)[
+      Important#if title != none [ (#title) ]
     ]
-  )
+    #v(0.3em)
+    #content
+  ])
 }
 
-#let note-box(content) = {
-  rect(
+#let note-box(title: none, content) = {
+  block(
     width: 100%,
     inset: 1.2em,
     fill: rgb("#fffef8"),
     stroke: (left: 4pt + dtu-yellow),
     radius: (right: 3pt),
+    breakable: true,
     [
-      #text(fill: dtu-dark-blue, size: 10pt)[Note]#content
-    ]
+      #text(weight: "bold", fill: dtu-dark-blue, size: 10pt)[
+        Note#if title != none [ (#title) ]
+      ]
+      #v(0.3em)
+      #content
+    ],
   )
 }
 
-#let dtu-highlight(content) = {
-  rect(
+#let dtu-highlight(title: none, content) = {
+  block(
     width: 100%,
     inset: 1.2em,
     fill: rgb("#f5f0ff"),
     stroke: (left: 4pt + dtu-purple),
     radius: (right: 3pt),
+    breakable: true,
     [
-      #text(weight: "bold", fill: dtu-purple, size: 12pt)[Key Point]
+      #text(weight: "bold", fill: dtu-purple, size: 12pt)[
+        Key Point#if title != none [ (#title) ]
+      ]
       #v(0.3em)
       #content
-    ]
+    ],
   )
 }
