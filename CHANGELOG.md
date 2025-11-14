@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extended integration with dtu-notes CLI
 - Custom color theme support
 
+# [0.5.1] - 2025-11-14
+- **Removed**: Legacy code, since it has no usage
+- **Fixed**: Standardised function calls for `definition`, `theorem`, etc.
+- **Added**: `math.typ` helper file with one function `amat` for afbildnignsmatricer.
+
+
 ## [0.5.0] - 2025-11-04
 - **Merged**: [#1](https://github.com/HollowNumber/dtu-note-template/pull/1)
   - This is a breaking change.
