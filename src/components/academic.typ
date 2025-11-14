@@ -1,50 +1,57 @@
 // Academic Components
-// Academic-focused components like definitions, theorems, and examples
 
 #import "../colors.typ": *
 
-#let definition(term, content) = {
+#let definition(title: none, content) = {
   block(
     width: 100%,
-    fill: dtu-light-gray,
-    stroke: 2pt + dtu-blue,
-    radius: 5pt,
-    inset: 1em,
+    inset: 1.2em,
+    fill: rgb("#f8f9ff"),
+    stroke: (left: 4pt + dtu-blue),
+    radius: (right: 3pt),
+    breakable: true,
     [
-      #text(weight: "bold", fill: dtu-blue, size: 11pt)[Definition: #term]
-      #v(0.5em)
+      #text(weight: "bold", fill: dtu-blue, size: 12pt)[
+        Definition#if title != none [ (#title) ]
+      ]
+      #v(0.3em)
       #content
-    ]
+    ],
   )
 }
 
-#let theorem(name: "", content) = {
-  let title = if name == "" { "Theorem" } else { "Theorem: " + name }
+#let theorem(title: none, content) = {
   block(
     width: 100%,
-    fill: dtu-light-gray.lighten(50%),
-    stroke: 2pt + dtu-dark-blue,
-    radius: 5pt,
-    inset: 1em,
+    inset: 1.2em,
+    fill: rgb("#fff8f8"),
+    stroke: (left: 4pt + dtu-red),
+    radius: (right: 3pt),
+    breakable: true,
     [
-      #text(weight: "bold", fill: dtu-dark-blue, size: 11pt)[#title]
-      #v(0.5em)
+      #text(weight: "bold", fill: dtu-red, size: 12pt)[
+        Theorem#if title != none [ (#title) ]
+      ]
+      #v(0.3em)
       #content
-    ]
+    ],
   )
 }
 
-#let example(content) = {
+#let example(title: none, content) = {
   block(
     width: 100%,
-    fill: dtu-yellow.lighten(80%),
-    stroke: 2pt + dtu-orange,
-    radius: 5pt,
-    inset: 1em,
+    inset: 1.2em,
+    fill: rgb("#f9fff9"),
+    stroke: (left: 4pt + dtu-green),
+    radius: (right: 3pt),
+    breakable: true,
     [
-      #text(weight: "bold", fill: dtu-orange, size: 11pt)[Example]
-      #v(0.5em)
+      #text(weight: "bold", fill: dtu-green, size: 12pt)[
+        Example#if title != none [ (#title) ]
+      ]
+      #v(0.3em)
       #content
-    ]
+    ],
   )
 }

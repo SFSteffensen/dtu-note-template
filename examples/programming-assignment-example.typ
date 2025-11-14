@@ -14,13 +14,13 @@
   Implement a Binary Search Tree (BST) class with insertion, search, and deletion operations.
 ]
 
-#code-specification([
+#code-specification[
   Create a `BinarySearchTree` class with the following methods:
   - `insert(value)`: Insert a value into the BST
   - `search(value)`: Return True if value exists, False otherwise
   - `delete(value)`: Remove a value from the BST
   - `inorder()`: Return list of values in inorder traversal
-])
+]
 
 #test-case(description: "Basic insertion and search")[
   ```python
@@ -126,7 +126,7 @@ class BinarySearchTree:
 ```
 ]
 
-#algorithm-analysis([
+#algorithm-analysis[
   #complexity-table(
     time-best: "O(log n)",
     time-avg: "O(log n)",
@@ -135,25 +135,25 @@ class BinarySearchTree:
   )
 
   Where `h` is the height of the tree. In a balanced BST, h = log n, but in the worst case (completely unbalanced), h = n.
-])
+]
 
-#debugging-tip([
+#debugging-tip[
   When implementing deletion, be careful with the three cases:
   1. Node has no children (leaf node)
   2. Node has one child
   3. Node has two children (requires finding inorder successor)
-])
+]
 
 #programming-problem(number: "2", points: "25", difficulty: "Easy")[
   Implement a function to find the maximum sum of a contiguous subarray (Kadane's Algorithm).
 ]
 
-#code-specification([
+#code-specification[
   Write a function `max_subarray_sum(arr)` that returns the maximum sum of any contiguous subarray.
   - Handle arrays with all negative numbers
   - Return 0 for empty arrays
   - Time complexity should be O(n)
-])
+]
 
 #test-case(
   description: "Subarray [4, -1, 2, 1] has the maximum sum of 6"
@@ -229,30 +229,30 @@ def max_subarray_with_indices(arr):
 ```
 ]
 
-#algorithm-analysis([
+#algorithm-analysis[
   *Time Complexity:* O(n) - Single pass through the array
 
   *Space Complexity:* O(1) - Only using a constant amount of extra space
 
   *Key Insight:* At each position, we decide whether to extend the current subarray or start a new one. We start a new subarray when the current sum becomes negative.
-])
+]
 
-#performance-note([
+#performance-note[
   Kadane's algorithm is optimal for this problem. The naive approach of checking all possible subarrays would take O(n³) time.
-])
+]
 
 #programming-problem(number: "3", points: "35", difficulty: "Hard")[
   Implement a hash table with separate chaining collision resolution. Include automatic resizing when load factor exceeds 0.75.
 ]
 
-#code-specification([
+#code-specification[
   Create a `HashTable` class with:
   - `put(key, value)`: Insert/update key-value pair
   - `get(key)`: Retrieve value for key (raise KeyError if not found)
   - `remove(key)`: Delete key-value pair
   - `size()`: Return number of key-value pairs
   - Automatic resizing when load factor > 0.75
-])
+]
 
 #code-implementation(
   caption: "Hash Table with Separate Chaining"

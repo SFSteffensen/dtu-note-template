@@ -3,3 +3,4 @@
 
 #import "layout.typ": *
 #import "content.typ": *
+#import "math.typ": *

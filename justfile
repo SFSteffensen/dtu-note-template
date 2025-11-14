@@ -1,5 +1,6 @@
 # DTU Template Development Justfile
 # Usage: just <recipe>
+# Cross-platform compatible (Linux, macOS, Windows with sh/bash)
 
 # Default recipe - show help
 default:
@@ -24,22 +25,22 @@ help:
 # Setup development environment
 setup:
     @echo "Setting up development environment..."
-    @powershell -Command "if (!(Test-Path 'test-output')) { New-Item -ItemType Directory -Path 'test-output' | Out-Null }"
+    @mkdir -p test-output
     @typst --version
     @echo "Setup complete!"
 
 # Validate package structure
 validate:
     @echo "Validating package structure..."
-    @powershell -Command "if (!(Test-Path 'typst.toml')) { Write-Error 'Missing typst.toml'; exit 1 }"
-    @powershell -Command "if (!(Test-Path 'src/lib.typ')) { Write-Error 'Missing src/lib.typ'; exit 1 }"
-    @powershell -Command "if (!(Test-Path 'src/assets/dtu-logo-cmyk.png')) { Write-Error 'Missing DTU logo'; exit 1 }"
-    @echo "Package structure valid!"
+    @test -f typst.toml || (echo "❌ Error: Missing typst.toml" && exit 1)
+    @test -f src/lib.typ || (echo "❌ Error: Missing src/lib.typ" && exit 1)
+    @test -f src/assets/dtu-logo-cmyk.png || (echo "❌ Error: Missing DTU logo" && exit 1)
+    @echo "✅ Package structure valid!"
 
 # Clean generated files
 clean:
     @echo "Cleaning generated files..."
-    @powershell -Command "if (Test-Path 'test-output') { Remove-Item -Recurse -Force 'test-output' }"
+    @rm -rf test-output
     @echo "Clean complete!"
 
 # Compile example documents
@@ -52,16 +53,22 @@ examples: setup
 # Test template compilation
 test: setup validate
     @echo "Testing template compilation..."
-    @echo "#import \"../src/lib.typ\": dtu-note" > test-output/test.typ
-    @echo "" >> test-output/test.typ  
-    @echo "#show: dtu-note.with(course: \"TEST\", title: \"Test\")" >> test-output/test.typ
-    @echo "" >> test-output/test.typ
-    @echo "= Test" >> test-output/test.typ
-    @echo "This is a test." >> test-output/test.typ
+    @printf '#import "../src/lib.typ": dtu-note\n\n#show: dtu-note.with(course: "TEST", title: "Test")\n\n= Test\nThis is a test.\n' > test-output/test.typ
     @typst compile --root . "test-output/test.typ" "test-output/test.pdf"
-    @echo "Test compilation successful!"
+    @echo "✅ Test compilation successful!"
 
 # Development workflow
 dev: setup validate examples
     @echo "Development environment ready!"
     @echo "Examples compiled. Edit files and run 'just examples' to recompile."
+
+# Watch for changes and recompile (requires inotify-tools on Linux or fswatch on macOS)
+watch:
+    @echo "Watching for changes..."
+    @echo "Note: This requires 'watchexec' to be installed"
+    @echo "Install with: cargo install watchexec-cli"
+    watchexec -e typ -w src -w examples "just examples"
+
+# Run all checks (for CI)
+ci: clean setup validate test examples
+    @echo "✅ All CI checks passed!"

@@ -4,9 +4,9 @@
 #import "../colors.typ": *
 
 #let dtu-figure(
-  content, 
-  caption: "", 
-  kind: "figure", 
+  content,
+  caption: "",
+  kind: "figure",
   supplement: auto
 ) = {
   figure(
@@ -31,15 +31,4 @@
       • #item
     ]
   }
-}
-
-// Conditional content helpers
-#let if-note(content) = context {
-  // This would need to be implemented based on document state
-  content
-}
-
-#let if-assignment(content) = context {
-  // This would need to be implemented based on document state  
-  content
 }
