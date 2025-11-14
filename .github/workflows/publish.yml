@@ -247,7 +247,6 @@ jobs:
                     changelog: CHANGELOG.md
                     title: DTU Template v${{ env.VERSION }}
                     draft: false
-                    prerelease: false
                   env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
